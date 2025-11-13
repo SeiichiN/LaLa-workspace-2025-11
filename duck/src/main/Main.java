@@ -7,7 +7,9 @@ public class Main {
 		magamo.say();
 		magamo.swim();
 		magamo.fly();
-
+		
+		magamo.setFlyBehavior(new JetFly());
+		magamo.fly();
 	}
 
 }
