@@ -10,6 +10,14 @@ public class Main {
 		
 		magamo.setFlyBehavior(new JetFly());
 		magamo.fly();
+		
+		Duck duck = new Duck("アヒル");
+		duck.say();
+		duck.swim();
+		
+		RubberDuck rduck = new RubberDuck("ラバーダック");
+		rduck.say();
+		rduck.swim();
 	}
 
 }
