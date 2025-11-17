@@ -31,11 +31,12 @@ public class ProbStrategy implements Strategy {
      *   つまり、過去の勝ち数が多いほど、勝つ確率が高くなると考えるわけである。
      */
     public Hand nextHand() {
-        // bet -- 0 から getSum() までの間で数字を決める
+        // getSum(0) -- グー、グーと自分が出したときの過去の勝ち数
     	int sum = getSum(currentHandValue);
         int bet = random.nextInt(sum);
+        // handvalue -- 出す手
         int handvalue = 0;
-        //  自分がグーで相手もグーのときの勝ち数よりもbetが小さければ
+        // bet によって、出す手を決める
         if (bet < history[currentHandValue][0]) {
             handvalue = 0;
         } else if (bet < history[currentHandValue][0] + history[currentHandValue][1]) {
