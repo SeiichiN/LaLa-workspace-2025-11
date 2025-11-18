@@ -1,0 +1,15 @@
+NullPointerExceptionが発生する例
+
+String s = null;
+int len = s.length();   // ← ここで NPE
+
+
+int[] array = null;
+System.out.println(array.length);  // ← NPE
+
+
+String[] list = new String[3];
+list[0] = null;
+System.out.println(list[0].length()); // ← NPE
+
+

@@ -10,26 +10,32 @@ public class Main {
 				{'.', '.', '.', '.', '.'},
 				{'.', '.', '.', '.', '.'}
 		};
-		// goblin
-		int y = new java.util.Random().nextInt(5);
-		int x = new java.util.Random().nextInt(5);
+		int y, x;
+		do {
+			y = new java.util.Random().nextInt(5);
+			x = new java.util.Random().nextInt(5);
+		} while(map[y][x] != '.');
 		map[y][x] = 'g';
 		
-		y = new java.util.Random().nextInt(5);
-		x = new java.util.Random().nextInt(5);
+		do {
+			y = new java.util.Random().nextInt(5);
+			x = new java.util.Random().nextInt(5);
+		} while(map[y][x] != '.');
 		map[y][x] = 's';
 		
-		y = new java.util.Random().nextInt(5);
-		x = new java.util.Random().nextInt(5);
+		do {
+			y = new java.util.Random().nextInt(5);
+			x = new java.util.Random().nextInt(5);
+		} while(map[y][x] != '.');
 		map[y][x] = 'p';
 		
 		for (y = 0; y < 5; y++) {
-			System.out.print("|");
 			for (x = 0; x < 5; x++) {
-				System.out.print(map[y][x] + "|");
+				System.out.print("|" + map[y][x]);
 			}
-			System.out.println();
+			System.out.println("|");
 		}
+		
 	}
 
 }
