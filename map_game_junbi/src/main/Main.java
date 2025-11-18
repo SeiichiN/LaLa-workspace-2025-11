@@ -7,7 +7,7 @@ public class Main {
 		gm.setPosition('g');
 		gm.setPosition('s');
 		gm.setPosition('p');
-		Player player = new Player(gm);
+		Player player = new Player("太郎", gm);
 		gm.printMap(player);
 		while (true) {
 			player.command();

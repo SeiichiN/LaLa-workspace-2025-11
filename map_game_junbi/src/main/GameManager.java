@@ -1,5 +1,8 @@
 package main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameManager {
 	public final int YSIZE = 5;
 	public final int XSIZE = 5;
@@ -11,11 +14,9 @@ public class GameManager {
 			{'.', '.', '.', '.', '.'}
 	};
 	
+	public List<Monster> monsters = new ArrayList<>();
+	
 	public GameManager() {}
-
-	public char[][] getMap() {
-		return map;
-	}
 
 	public void setPosition(char ch) {
 		int y, x;
@@ -41,5 +42,16 @@ public class GameManager {
 		
 	}
 	
-
+	public void setMonster(Monster m) {
+		this.monsters.add(m);
+	}
+	
+	public Monster getMonster(char ch) {
+		for (Monster m : monsters) {
+			if (m.suffix == ch) {
+				return m;
+			}
+		}
+		return null;
+	}
 }
