@@ -55,4 +55,40 @@ public class GameManager {
 		}
 		return null;
 	}
+	
+	public void monster2player(Monster m, Player p) {
+		p.attack(m);
+		if (m.hp <= 0) {
+			System.out.println(p.name + "は" + m.type + "を倒した!");
+			this.monsters.remove(m);
+			this.map[p.py][p.px] = '.';
+		} else {
+			m.attack(p);
+			if (p.hp <= 0) {
+				// gameOver();
+			}
+		}
+	}
+	
+	public void player2monster(Player p, Monster m) {
+		m.attack(p);
+		if (p.hp <= 0) {
+			// gameOver();
+		} else {
+			p.attack(m);
+		}
+	}
+	
+	public void battle(Player p) {
+		char m = this.map[p.py][p.px];
+		Monster monster = this.getMonster(m);
+		int num = new java.util.Random().nextInt(100);
+		if (num % 2 == 0) {
+			monster2player(monster, p);
+		} else {
+			player2monster(p, monster);
+		}
+	}
+	
+
 }

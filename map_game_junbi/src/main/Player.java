@@ -36,42 +36,8 @@ public class Player {
 				px = Math.min(gm.XSIZE - 1, px + 1);
 			}
 			case 'b' -> {
-				battle();
+				gm.battle(this);
 			}
-		}
-	}
-	
-	public void monster2player(Monster m) {
-		this.attack(m);
-		if (m.hp <= 0) {
-			System.out.println(this.name + "は" + m.type + "を倒した!");
-			this.gm.monsters.remove(m);
-			gm.map[py][px] = '.';
-		} else {
-			m.attack(this);
-			if (hp <= 0) {
-				// gameOver();
-			}
-		}
-	}
-	
-	public void player2monster(Monster m) {
-		m.attack(this);
-		if (hp <= 0) {
-			// gameOver();
-		} else {
-			this.attack(m);
-		}
-	}
-	
-	public void battle() {
-		char m = gm.map[py][px];
-		Monster monster = gm.getMonster(m);
-		int num = new java.util.Random().nextInt(100);
-		if (num % 2 == 0) {
-			monster2player(monster);
-		} else {
-			player2monster(monster);
 		}
 	}
 	
