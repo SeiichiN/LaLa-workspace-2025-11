@@ -7,7 +7,7 @@ public class Slime extends Monster {
 	}
 
 	public Slime() {
-		super('s', "スライム");
+		this('s', "スライム");
 	}
 	
 	@Override

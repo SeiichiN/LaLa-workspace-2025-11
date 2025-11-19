@@ -43,6 +43,7 @@ public class GameManager {
 	}
 	
 	public void setMonster(Monster m) {
+		setPosition(m.suffix);
 		this.monsters.add(m);
 	}
 	

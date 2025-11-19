@@ -19,7 +19,7 @@ public class Player {
 	}
 	
 	public void command() {
-		System.out.print("wsad > ");
+		System.out.print("wsad:移動 b:戦う q:終了 > ");
 		@SuppressWarnings("resource")
 		char ch = new java.util.Scanner(System.in).next().charAt(0);
 		switch (ch) {
@@ -71,6 +71,7 @@ public class Player {
 		if (num % 2 == 0) {
 			monster2player(monster);
 		} else {
+			player2monster(monster);
 		}
 	}
 	
@@ -79,5 +80,16 @@ public class Player {
 		int damage = new java.util.Random().nextInt(30);
 		m.hp -= damage;
 		System.out.println(m.type + "は" + damage + "のダメージを受けた!");
+	}
+	
+	public void look() {
+		char ch = gm.map[py][px];
+		String msg = switch(ch) {
+		case 'g' -> "ゴブリンが現れた！";
+		case 's' -> "スライムが現れた！";
+		case 'p' -> "ポーションがあった！";
+		default -> "何も見当たらない";
+		};
+		System.out.println(msg);
 	}
 }
