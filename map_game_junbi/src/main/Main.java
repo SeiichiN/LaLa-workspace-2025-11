@@ -9,7 +9,9 @@ public class Main {
 		Slime s = new Slime();
 		gm.setMonster(s);
 		
-		gm.setPosition('p');
+		Potion p = new Potion();
+		gm.setItem(p);
+
 		Player player = new Player("太郎", gm);
 		gm.printMap(player);
 		while (true) {

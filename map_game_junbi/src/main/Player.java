@@ -1,11 +1,16 @@
 package main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player {
 	public String name = "プレイヤー";
 	public int py;
 	public int px;
-	public int hp = 100;
+	public final int MAX_HP = 100;
+	public int hp = MAX_HP;
 	private GameManager gm;
+	private List<Item> items = new ArrayList<>();
 	
 	public Player(String name, GameManager gm) {
 		this.name = name;
@@ -19,7 +24,7 @@ public class Player {
 	}
 	
 	public void command() {
-		System.out.print("wsad:移動 b:戦う q:終了 > ");
+		System.out.print("wsad:移動 b:戦う t:取る u:使う  q:終了 > ");
 		@SuppressWarnings("resource")
 		char ch = new java.util.Scanner(System.in).next().charAt(0);
 		switch (ch) {
@@ -37,6 +42,12 @@ public class Player {
 			}
 			case 'b' -> {
 				gm.battle(this);
+			}
+			case 't' -> {
+				this.take();
+			}
+			case 'u' -> {
+				this.selectItem();
 			}
 			case 'q' -> {
 				gm.gameOver(this);
@@ -62,4 +73,33 @@ public class Player {
 		};
 		System.out.println(msg);
 	}
+	
+	public void take() {
+		Item item = gm.getItem(this);
+		System.out.println(this.name + "は" + item.name + "を手に入れた!");
+		this.items.add(item);
+	}
+	
+	public void selectItem() {
+		System.out.print("アイテム:");
+		for (int i = 0; i < items.size(); i++) {
+			System.out.print(i+1 + ":" + items.get(i).name + " ");
+		}
+		System.out.println();
+		System.out.print("選択>");
+		int index = new java.util.Scanner(System.in).nextInt();
+		Item item = items.get(index - 1);
+		use(item);
+	}
+	
+	public void use(Item item) {
+		System.out.println(this.name + "は" + item.name + "を使った!");
+		if (item.suffix == 'p') {
+			int nowHP = this.hp;
+			Potion p = (Potion) item;
+			this.hp = Math.min(this.hp + p.recoveryHp, this.MAX_HP);
+			System.out.println("HPが" + (this.hp - nowHP) + "回復した!");
+		}
+	}
+	
 }

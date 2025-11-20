@@ -10,9 +10,4 @@ public class Goblin extends Monster {
 		this('g', "ゴブリン");
 	}
 	
-	@Override
-	public void attack(Player player) {
-		System.out.println("\n" + type + "は" + player.name + "を攻撃した!");
-		super.attack(player);
-	}
 }

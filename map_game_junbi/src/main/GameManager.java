@@ -15,6 +15,7 @@ public class GameManager {
 	};
 	
 	public List<Monster> monsters = new ArrayList<>();
+	public List<Item> items = new ArrayList<>();
 	
 	public GameManager() {}
 
@@ -28,6 +29,7 @@ public class GameManager {
 	}
 
 	public void printMap(Player player) {
+		System.out.println();
 		for (int y = 0; y < YSIZE; y++) {
 			for (int x = 0; x < XSIZE; x++) {
 				System.out.print('|');
@@ -45,6 +47,22 @@ public class GameManager {
 	public void setMonster(Monster m) {
 		setPosition(m.suffix);
 		this.monsters.add(m);
+	}
+	
+	public void setItem(Item item) {
+		setPosition(item.suffix);
+		this.items.add(item);
+	}
+	
+	public Item getItem(Player p) {
+		for (Item i : items) {
+			if (i.suffix == map[p.py][p.px]) {
+				map[p.py][p.px] = '.';
+				return i;
+			}
+		}
+		return null;
+		
 	}
 	
 	public Monster getMonster(char ch) {
