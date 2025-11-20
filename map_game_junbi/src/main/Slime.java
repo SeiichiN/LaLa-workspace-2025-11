@@ -12,7 +12,7 @@ public class Slime extends Monster {
 	
 	@Override
 	public void attack(Player player) {
-		System.out.println(type + "は" + player.name + "を攻撃した!");
+		System.out.println("\n" + type + "は" + player.name + "を攻撃した!");
 		super.attack(player);
 	}
 }

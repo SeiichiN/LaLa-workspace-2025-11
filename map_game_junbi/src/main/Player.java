@@ -38,11 +38,15 @@ public class Player {
 			case 'b' -> {
 				gm.battle(this);
 			}
+			case 'q' -> {
+				gm.gameOver(this);
+			}
 		}
 	}
 	
 	public void attack(Monster m) {
-		System.out.println(name + "は" + m.type + "を攻撃した!");
+		if (this.hp <= 0) return;
+		System.out.println("\n" + name + "は" + m.type + "を攻撃した!");
 		int damage = new java.util.Random().nextInt(30);
 		m.hp -= damage;
 		System.out.println(m.type + "は" + damage + "のダメージを受けた!");

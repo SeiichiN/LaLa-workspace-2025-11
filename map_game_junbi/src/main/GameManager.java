@@ -90,5 +90,15 @@ public class GameManager {
 		}
 	}
 	
-
+	public void gameOver(Player p) {
+		if (p.hp <= 0) {
+			System.out.println(p.name + "は倒れた！");
+		} 
+		String msg = """
+				======================
+				|     GAME OVER      |
+				======================
+				""";
+		System.out.println(msg);
+	}
 }
