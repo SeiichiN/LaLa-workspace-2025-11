@@ -56,7 +56,7 @@ public class GameManager {
 		return null;
 	}
 	
-	public void monster2player(Monster m, Player p) {
+	public void p2m(Player p, Monster m) {
 		p.attack(m);
 		if (m.hp <= 0) {
 			System.out.println(p.name + "は" + m.type + "を倒した!");
@@ -65,17 +65,24 @@ public class GameManager {
 		} else {
 			m.attack(p);
 			if (p.hp <= 0) {
-				// gameOver();
+				System.out.println(m.type + "は" + p.name + "を倒した!");
+				gameOver(p);
 			}
 		}
 	}
 	
-	public void player2monster(Player p, Monster m) {
+	public void m2p(Monster m, Player p) {
 		m.attack(p);
 		if (p.hp <= 0) {
-			// gameOver();
+			System.out.println(m.type + "は" + p.name + "を倒した!");
+			gameOver(p);
 		} else {
 			p.attack(m);
+			if (m.hp <= 0) {
+				System.out.println(p.name + "は" + m.type + "を倒した!");
+				this.monsters.remove(m);
+				this.map[p.py][p.px] = '.';
+			}
 		}
 	}
 	
@@ -84,9 +91,9 @@ public class GameManager {
 		Monster monster = this.getMonster(m);
 		int num = new java.util.Random().nextInt(100);
 		if (num % 2 == 0) {
-			monster2player(monster, p);
+			m2p(monster, p);
 		} else {
-			player2monster(p, monster);
+			p2m(p, monster);
 		}
 	}
 	
@@ -100,5 +107,6 @@ public class GameManager {
 				======================
 				""";
 		System.out.println(msg);
+		System.exit(0);
 	}
 }
