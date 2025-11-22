@@ -6,18 +6,22 @@ import java.util.List;
 public class GameManager {
 	public final int YSIZE = 5;
 	public final int XSIZE = 5;
-	public char[][] map = {
-			{'.', '.', '.', '.', '.'},
-			{'.', '.', '.', '.', '.'},
-			{'.', '.', '.', '.', '.'},
-			{'.', '.', '.', '.', '.'},
-			{'.', '.', '.', '.', '.'}
-	};
+	public char[][] map = new char[YSIZE][XSIZE];
 	
 	public List<Monster> monsters = new ArrayList<>();
 	public List<Item> items = new ArrayList<>();
 	
-	public GameManager() {}
+	public GameManager() {
+		initMap();
+	}
+	
+	public void initMap() {
+		for (int y = 0; y < YSIZE; y++) {
+			for (int x = 0; x < XSIZE; x++) {
+				this.map[y][x] = '.';
+			}
+		}
+	}
 
 	public void setPosition(char ch) {
 		int y, x;
@@ -74,44 +78,20 @@ public class GameManager {
 		return null;
 	}
 	
-	public void p2m(Player p, Monster m) {
+	public void battle(Player p) {
+		char ch = this.map[p.py][p.px];
+		Monster m = this.getMonster(ch);
 		p.attack(m);
 		if (m.hp <= 0) {
-			System.out.println(p.name + "は" + m.type + "を倒した!");
+			System.out.println(p.name + "は" + m.name + "を倒した!");
 			this.monsters.remove(m);
 			this.map[p.py][p.px] = '.';
 		} else {
 			m.attack(p);
 			if (p.hp <= 0) {
-				System.out.println(m.type + "は" + p.name + "を倒した!");
+				System.out.println(m.name + "は" + p.name + "を倒した!");
 				gameOver(p);
 			}
-		}
-	}
-	
-	public void m2p(Monster m, Player p) {
-		m.attack(p);
-		if (p.hp <= 0) {
-			System.out.println(m.type + "は" + p.name + "を倒した!");
-			gameOver(p);
-		} else {
-			p.attack(m);
-			if (m.hp <= 0) {
-				System.out.println(p.name + "は" + m.type + "を倒した!");
-				this.monsters.remove(m);
-				this.map[p.py][p.px] = '.';
-			}
-		}
-	}
-	
-	public void battle(Player p) {
-		char m = this.map[p.py][p.px];
-		Monster monster = this.getMonster(m);
-		int num = new java.util.Random().nextInt(100);
-		if (num % 2 == 0) {
-			m2p(monster, p);
-		} else {
-			p2m(p, monster);
 		}
 	}
 	

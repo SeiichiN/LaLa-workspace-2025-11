@@ -4,6 +4,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		GameManager gm = new GameManager();
+
 		Goblin g = new Goblin();
 		gm.setMonster(g);
 		Slime s = new Slime();

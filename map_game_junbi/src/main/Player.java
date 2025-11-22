@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Player {
 	public String name = "プレイヤー";
@@ -19,8 +20,9 @@ public class Player {
 	}
 	
 	private void setRandomPos() {
-		py = new java.util.Random().nextInt(gm.YSIZE);
-		px = new java.util.Random().nextInt(gm.XSIZE);
+		Random r = new Random();
+		py = r.nextInt(gm.YSIZE);
+		px = r.nextInt(gm.XSIZE);
 	}
 	
 	public void command() {
@@ -57,10 +59,10 @@ public class Player {
 	
 	public void attack(Monster m) {
 		if (this.hp <= 0) return;
-		System.out.println("\n" + name + "は" + m.type + "を攻撃した!");
+		System.out.println("\n" + name + "は" + m.name + "を攻撃した!");
 		int damage = new java.util.Random().nextInt(30);
 		m.hp -= damage;
-		System.out.println(m.type + "は" + damage + "のダメージを受けた!");
+		System.out.println(m.name + "は" + damage + "のダメージを受けた!");
 	}
 	
 	public void look() {

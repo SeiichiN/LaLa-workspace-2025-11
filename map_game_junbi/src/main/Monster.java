@@ -1,17 +1,17 @@
 package main;
 
 public abstract class Monster {
-	public String type;
+	public String name;
 	public int hp = 100;
 	public char suffix;
 	
 	public Monster(char suffix, String type) {
-		this.type = type;
+		this.name = type;
 		this.suffix = suffix;
 	}
 	
 	public void attack(Player player) {
-		System.out.println("\n" + type + "は" + player.name + "を攻撃した!");
+		System.out.println("\n" + name + "は" + player.name + "を攻撃した!");
 		if (this.hp <= 0) return;
 		int damage = new java.util.Random().nextInt(30);
 		player.hp -= damage;
