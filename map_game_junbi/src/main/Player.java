@@ -49,7 +49,7 @@ public class Player {
 				this.take();
 			}
 			case 'u' -> {
-				this.selectItem();
+				this.use();
 			}
 			case 'q' -> {
 				gm.gameOver(this);
@@ -82,25 +82,34 @@ public class Player {
 		this.items.add(item);
 	}
 	
-	public void selectItem() {
+	public Item selectItem() {
 		System.out.print("アイテム:");
 		for (int i = 0; i < items.size(); i++) {
 			System.out.print(i+1 + ":" + items.get(i).name + " ");
 		}
 		System.out.println();
 		System.out.print("選択>");
+		@SuppressWarnings("resource")
 		int index = new java.util.Scanner(System.in).nextInt();
 		Item item = items.get(index - 1);
-		use(item);
+		return item;
 	}
 	
-	public void use(Item item) {
-		System.out.println(this.name + "は" + item.name + "を使った!");
-		if (item.suffix == 'p') {
-			int nowHP = this.hp;
+	public void usePotion(Item item) {
+		int nowHP = this.hp;
+		if (item instanceof Potion) {
 			Potion p = (Potion) item;
 			this.hp = Math.min(this.hp + p.recoveryHp, this.MAX_HP);
 			System.out.println("HPが" + (this.hp - nowHP) + "回復した!");
+			items.remove(item);
+		}
+	}
+	
+	public void use() {
+		Item item = selectItem();
+		System.out.println(this.name + "は" + item.name + "を使った!");
+		switch (item.suffix) {
+		case 'p' -> usePotion(item);
 		}
 	}
 	
