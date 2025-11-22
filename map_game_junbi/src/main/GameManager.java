@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class GameManager {
 	public final int YSIZE = 5;
@@ -10,6 +11,8 @@ public class GameManager {
 	
 	public List<Monster> monsters = new ArrayList<>();
 	public List<Item> items = new ArrayList<>();
+	private int numOfDefeatedMonsters = 0;
+
 	
 	public GameManager() {
 		initMap();
@@ -24,10 +27,11 @@ public class GameManager {
 	}
 
 	public void setPosition(char ch) {
+		Random r = new Random();
 		int y, x;
 		do {
-			y = new java.util.Random().nextInt(YSIZE);
-			x = new java.util.Random().nextInt(XSIZE);
+			y = r.nextInt(YSIZE);
+			x = r.nextInt(XSIZE);
 		} while(map[y][x] != '.');
 		map[y][x] = ch;
 	}
@@ -85,6 +89,7 @@ public class GameManager {
 		if (m.hp <= 0) {
 			System.out.println(p.name + "は" + m.name + "を倒した!");
 			this.monsters.remove(m);
+			this.numOfDefeatedMonsters++;
 			this.map[p.py][p.px] = '.';
 		} else {
 			m.attack(p);
@@ -95,10 +100,17 @@ public class GameManager {
 		}
 	}
 	
+	public boolean isEndCheck() {
+		return this.monsters.isEmpty();
+	}
+	
 	public void gameOver(Player p) {
 		if (p.hp <= 0) {
 			System.out.println(p.name + "は倒れた！");
-		} 
+		} else if (this.monsters.isEmpty()) {
+			System.out.println(p.name + "は" + this.numOfDefeatedMonsters + "匹のモンスターを倒した!");
+			System.out.println(p.name + "は勝利した!");
+		}
 		String msg = """
 				======================
 				|     GAME OVER      |

@@ -17,6 +17,9 @@ public class Main {
 		gm.printMap(player);
 		while (true) {
 			player.command();
+			if (gm.isEndCheck()) {
+				gm.gameOver(player);
+			}
 			gm.printMap(player);
 			player.look();
 		}
