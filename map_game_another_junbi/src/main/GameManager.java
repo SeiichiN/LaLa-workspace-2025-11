@@ -1,21 +1,26 @@
 package main;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class GameManager {
-	public final int YSIZE = 5;
-	public final int XSIZE = 5;
-	public char[][] map = new char[YSIZE][XSIZE];
-	
-	public List<Monster> monsters = new ArrayList<>();
-	public List<Item> items = new ArrayList<>();
+	public final int YSIZE;
+	public final int XSIZE;
+	public char[][] map;
+	public int numMonsters = 0;
 	private int defeatedMonsters = 0;
-
+	public MoveChar moveChar;
+	
+	public GameManager(int ysize, int xsize) {
+		this.YSIZE = ysize;
+		this.XSIZE = xsize;
+		this.map = new char[YSIZE][XSIZE];
+		initMap();
+		this.moveChar = new MoveCharImpl(this);
+	}
 	
 	public GameManager() {
-		initMap();
+		this(5, 5);
 	}
 	
 	public void initMap() {
@@ -25,8 +30,12 @@ public class GameManager {
 			}
 		}
 	}
+	
+	public void setMoveChar(MoveChar moveChar) {
+		this.moveChar = moveChar;
+	}
 
-	public void setPosition(char ch) {
+	private void setPosition(char ch) {
 		Random r = new Random();
 		int y, x;
 		do {
@@ -34,6 +43,15 @@ public class GameManager {
 			x = r.nextInt(XSIZE);
 		} while(map[y][x] != '.');
 		map[y][x] = ch;
+	}
+	
+	public void setMonster(char ch) {
+		setPosition(ch);
+		numMonsters++;
+	}
+	
+	public void setItem(char ch) {
+		this.setPosition(ch);
 	}
 
 	public void printMap(Player player) {
@@ -52,43 +70,10 @@ public class GameManager {
 		
 	}
 	
-	public void setMonster(Monster m) {
-		setPosition(m.suffix);
-		this.monsters.add(m);
-	}
-	
-	public void setItem(Item item) {
-		setPosition(item.suffix);
-		this.items.add(item);
-	}
-	
-	public Item getItem(Player p) {
-		for (Item i : items) {
-			if (i.suffix == map[p.py][p.px]) {
-				map[p.py][p.px] = '.';
-				return i;
-			}
-		}
-		return null;
-		
-	}
-	
-	public Monster getMonster(char ch) {
-		for (Monster m : monsters) {
-			if (m.suffix == ch) {
-				return m;
-			}
-		}
-		return null;
-	}
-	
-	public void battle(Player p) {
-		char ch = this.map[p.py][p.px];
-		Monster m = this.getMonster(ch);
+	public void attackAndReturn(Player p, Monster m) {
 		p.attack(m);
 		if (m.hp <= 0) {
 			System.out.println(p.name + "は" + m.name + "を倒した!");
-			this.monsters.remove(m);
 			this.defeatedMonsters++;
 			this.map[p.py][p.px] = '.';
 		} else {
@@ -100,14 +85,40 @@ public class GameManager {
 		}
 	}
 	
+	public void battleInfo(Player p, Monster m) {
+		System.out.println("\n" + p.name + " HP:" + p.hp + " " + m.name + " HP:" + m.hp);
+	}
+	
+	public void battle(Player p) {
+		char ch = this.map[p.py][p.px];
+		if (ch == '.') return;
+		Monster m = null;
+		switch (ch) {
+		case 'g' -> m = new Goblin();
+		case 's' -> m = new Slime();
+		}
+		while (m.hp > 0 && p.hp > 0) {
+			System.out.print("a:攻撃 e:逃げる > ");
+			@SuppressWarnings("resource")
+			char ch2 = new Scanner(System.in).next().charAt(0);
+			if (ch2 == 'a') {
+				attackAndReturn(p, m);
+			} else if (ch2 == 'e') {
+				System.out.println(p.name + "は逃げた!");
+				break;
+			}
+			battleInfo(p, m);
+		}	
+	}
+	
 	public boolean isEndCheck() {
-		return this.monsters.isEmpty();
+		return this.defeatedMonsters >= this.numMonsters;
 	}
 	
 	public void gameOver(Player p) {
 		if (p.hp <= 0) {
 			System.out.println(p.name + "は倒れた！");
-		} else if (this.monsters.isEmpty()) {
+		} else if (isEndCheck()) {
 			System.out.println(p.name + "は" + this.defeatedMonsters + "匹のモンスターを倒した!");
 			System.out.println(p.name + "は勝利した!");
 		}
