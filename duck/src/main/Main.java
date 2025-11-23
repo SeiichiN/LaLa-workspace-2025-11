@@ -15,7 +15,7 @@ public class Main {
 		duck.say();
 		duck.swim();
 		
-		RubberDuck rduck = new RubberDuck("ラバーダック");
+		RabberDuck rduck = new RabberDuck("ラバーダック");
 		rduck.say();
 		rduck.swim();
 	}

@@ -7,27 +7,24 @@ public class Magamo extends Bird implements Flying, Swimming {
 	
 	public Magamo(String name) {
 		super(name);
-		this.FlyBehavior = new NormalFly();
-		this.SwimBehavior = new NormalSwim();
-		this.SayBehavior = new NormalSay();
+		this.FlyBehavior = new NormalFly(this);
+		this.SwimBehavior = new NormalSwim(this);
+		this.SayBehavior = new NormalSay(this);
 	}
 
 	@Override
 	public void say() {
-		System.out.print(this.name + "は");
 		this.SayBehavior.say();
 	}
 
 	@Override
 	public void swim() {
-		System.out.print(this.name + "は");
 		this.SwimBehavior.swim();
 		
 	}
 
 	@Override
 	public void fly() {
-		System.out.print(this.name + "は");
 		this.FlyBehavior.fly();
 		
 	}

@@ -6,8 +6,8 @@ public class Duck extends Bird implements Swimming {
 
 	public Duck(String name) {
 		super(name);
-		this.SwimBehavior = new NormalSwim();
-		this.SayBehavior = new NormalSay();
+		this.SwimBehavior = new NormalSwim(this);
+		this.SayBehavior = new NormalSay(this);
 	}
 
 	@Override
