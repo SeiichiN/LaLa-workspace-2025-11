@@ -11,7 +11,7 @@ public class SettingUtil {
 
 	public void execute() {
 		printProperties();
-		char ch = Util.getChar("変更しますか?(y/n)");
+		char ch = Util.getChar("変更しますか? (y/n) > ");
 		if (ch == 'y') {
 			saveProperties();
 		}

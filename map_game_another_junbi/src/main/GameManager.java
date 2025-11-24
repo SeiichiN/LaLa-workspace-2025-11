@@ -131,8 +131,11 @@ public class GameManager {
 				======================
 				""";
 		System.out.println(msg);
-		SettingUtil settingUtil = new SettingUtil();
-		settingUtil.execute();
+		char ch = Util.getChar("設定を確認しますか? (y/n) > ");
+		if (ch == 'y') {
+			SettingUtil settingUtil = new SettingUtil();
+			settingUtil.execute();
+		}
 		System.out.println("終了します");
 	}
 }

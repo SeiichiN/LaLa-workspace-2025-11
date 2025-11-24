@@ -12,8 +12,8 @@ public abstract class Monster {
 	}
 	
 	public void attack(Player player) {
-		System.out.println("\n" + name + "は" + player.name + "を攻撃した!");
 		if (this.hp <= 0) return;
+		System.out.println("\n" + name + "は" + player.name + "を攻撃した!");
 		int damage = new java.util.Random().nextInt(30);
 		player.hp -= damage;
 		System.out.println(player.name + "は" + damage + "のダメージを受けた!");
