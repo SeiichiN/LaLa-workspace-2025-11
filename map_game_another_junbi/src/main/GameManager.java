@@ -3,6 +3,9 @@ package main;
 import java.util.Random;
 import java.util.Scanner;
 
+import util.SettingUtil;
+import util.Util;
+
 public class GameManager {
 	public final int YSIZE;
 	public final int XSIZE;
@@ -10,6 +13,7 @@ public class GameManager {
 	public int numMonsters = 0;
 	private int defeatedMonsters = 0;
 	public MoveChar moveChar;
+	public boolean isEnd = false;
 	
 	public GameManager(int ysize, int xsize) {
 		this.YSIZE = ysize;
@@ -80,7 +84,7 @@ public class GameManager {
 			m.attack(p);
 			if (p.hp <= 0) {
 				System.out.println(m.name + "は" + p.name + "を倒した!");
-				gameOver(p);
+				isEnd = true;
 			}
 		}
 	}
@@ -110,14 +114,14 @@ public class GameManager {
 		}	
 	}
 	
-	public boolean isEndCheck() {
+	public boolean isCheckDefeated() {
 		return this.defeatedMonsters >= this.numMonsters;
 	}
 	
 	public void gameOver(Player p) {
 		if (p.hp <= 0) {
 			System.out.println(p.name + "は倒れた！");
-		} else if (isEndCheck()) {
+		} else if (isCheckDefeated()) {
 			System.out.println(p.name + "は" + this.defeatedMonsters + "匹のモンスターを倒した!");
 			System.out.println(p.name + "は勝利した!");
 		}
@@ -127,6 +131,8 @@ public class GameManager {
 				======================
 				""";
 		System.out.println(msg);
-		System.exit(0);
+		SettingUtil settingUtil = new SettingUtil();
+		settingUtil.execute();
+		System.out.println("終了します");
 	}
 }

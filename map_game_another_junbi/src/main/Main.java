@@ -1,25 +1,35 @@
 package main;
 
+import util.ReadSettings;
+
 public class Main {
 
 	public static void main(String[] args) {
-		GameManager gm = new GameManager(6, 6);
+		ReadSettings rs = new ReadSettings();
+		GameManager gm = new GameManager(rs.YSIZE, rs.XSIZE);
 
-		gm.setMonster('g');
-		gm.setMonster('s');
-		gm.setItem('p');
+		for (int i = 0; i < rs.NUM_GOBLIN; i++) {
+			gm.setMonster('g');
+		}
+		for (int i = 0; i < rs.NUM_SLIME; i++) {
+			gm.setMonster('s');
+		}
+		for (int i = 0; i < rs.NUM_POTION; i++) {
+			gm.setItem('p');
+		}
 
-		Player player = new Player("太郎", gm);
+		Player player = new Player(rs.NAME, gm);
 		gm.printMap(player);
 		while (true) {
 			player.command();
-			if (gm.isEndCheck()) {
-				gm.gameOver(player);
+			if (gm.isCheckDefeated() || gm.isEnd) {
+				break;
 			}
 			gm.moveChar.move();
 			gm.printMap(player);
 			player.look();
 		}
+		gm.gameOver(player);
 	}
 
 }

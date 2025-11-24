@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+import util.Util;
+
 public class Player {
 	public String name = "プレイヤー";
 	public int py;
@@ -41,7 +43,7 @@ public class Player {
 			case 't' -> this.take();
 			case 'u' -> this.use();
 			case 'i' -> this.printInfo();
-			case 'q' -> gm.gameOver(this);
+			case 'q' -> this.setEndTrue();
 		}
 	}
 	
@@ -67,6 +69,10 @@ public class Player {
 	public void moveRight() {
 		px = Math.min(gm.XSIZE - 1, px + 1);
 		hpRecoveryUp();
+	}
+	
+	public void setEndTrue() {
+		this.gm.isEnd = true;
 	}
 	
 	public void printInfo() {

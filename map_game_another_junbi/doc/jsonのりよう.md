@@ -135,4 +135,117 @@ Javaで、変数の内容を保存するのに、データベースを使わず�
 
 必要であれば、JavaでJSONを読み書きする簡単なサンプルコードも作りますので言ってください！
 
-<!-- 修正時刻: Wed 2025/11/19 17:16:06 -->
+<div class="my-text">
+.propertiesファイルを使う場合は、どうするのですか？
+</div>
+
+---
+
+`.properties` ファイルは **「キー＝値」形式の設定を保存するための、最も手軽な仕組み」** です。
+Java 標準ライブラリだけで読み書きでき、外部ライブラリは不要です。
+
+---
+
+# ✔ `.properties` ファイルの基本フォーマット
+
+```
+username=Taro
+hp=100
+level=5
+```
+
+---
+
+# 📘 1. 書き込むサンプルコード（Properties → ファイル）
+
+```java
+import java.io.FileOutputStream;
+import java.util.Properties;
+
+public class WriteProperties {
+    public static void main(String[] args) throws Exception {
+        Properties prop = new Properties();
+
+        prop.setProperty("username", "Taro");
+        prop.setProperty("hp", "100");
+        prop.setProperty("level", "5");
+
+        // player.properties に保存
+        try (FileOutputStream out = new FileOutputStream("player.properties")) {
+            prop.store(out, "Player Settings");
+        }
+
+        System.out.println("保存しました！");
+    }
+}
+```
+
+作成されるファイル `player.properties` は次のようになります：
+
+```
+#Player Settings
+#Mon Nov 24 14:24:00 JST 2025
+username=Taro
+hp=100
+level=5
+```
+
+---
+
+# 📙 2. 読み込むサンプルコード（ファイル → Properties）
+
+```java
+import java.io.FileInputStream;
+import java.util.Properties;
+
+public class ReadProperties {
+    public static void main(String[] args) throws Exception {
+        Properties prop = new Properties();
+
+        // 読み込み
+        try (FileInputStream in = new FileInputStream("player.properties")) {
+            prop.load(in);
+        }
+
+        // 取り出し
+        String username = prop.getProperty("username");
+        int hp = Integer.parseInt(prop.getProperty("hp"));
+        int level = Integer.parseInt(prop.getProperty("level"));
+
+        System.out.println(username + " / HP=" + hp + " / Level=" + level);
+    }
+}
+```
+
+---
+
+# 📌 `.properties` の特徴（JSON と比較）
+
+| 項目           | .properties | JSON           |
+| ------------ | ----------- | -------------- |
+| データ構造        | キー＝値（階層不可）  | オブジェクト / 配列もOK |
+| 可読性          | シンプル        | やや複雑           |
+| 設定ファイル用途     | ◎ 最適        | △ やや複雑         |
+| 複雑なデータ（リスト等） | × 表現不可      | ◎ 得意           |
+
+### `.properties` が向く例
+
+* ゲームの設定（音量、キー設定など）
+* データベース接続設定
+* 小規模なユーザー設定
+* フラグやパラメータなど
+
+---
+
+# ✨ 補足：数字や真偽値は文字列扱い
+
+`.properties` は **すべて文字列** なので、数値が必要ならプログラム側で `Integer.parseInt()` のように変換します。
+
+---
+
+必要なら、⚫ ゲームの設定管理用 `.properties` の雛形や、⚫ 保存するクラスを自動で `.properties` に変換するコードも作れますので言ってください！
+
+
+
+
+<!-- 修正時刻: Mon 2025/11/24 06:27:50 -->
