@@ -1,0 +1,42 @@
+1文字入力をどうするか？
+
+現在は、次のようにして 1文字を入力している。
+
+char ch = new java.util.Scanner(System.in).nextLine().charAt(0);
+
+これは、次のような不都合がある。
+
+(1) 単に改行キーだけ入力した場合にエラーが起こる。
+(2) 1文字以上も入力できてしまう。
+
+あるいは、次のようなこともできるが...、
+
+char ch = new java.util.Scanner(System.in).next().charAt(0);
+
+(1) 単に改行キーだけ入力した場合に、入力待ちが続く。
+(2) 1文字以上も入力できてしまう。
+
+
+そこで、次のようにする。
+
+char ch = ' ';
+while (true) {
+  System.out.print(" > ");
+  String text = new java.util.Scanner(System.in).nextLine();
+  if (text.length() == 1) {
+    ch = text.charAt(0);
+    break;
+  }
+}
+
+これだと、単に改行キーが入力されても対応できる。
+
+
+
+
+
+
+
+
+
+;; 修正時刻: Mon 2025/11/24 06:27:50

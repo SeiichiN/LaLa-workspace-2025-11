@@ -31,9 +31,7 @@ public class Player {
 	}
 	
 	public void command() {
-		System.out.print("wsad:移動 b:戦う t:取る u:使う i:情報 q:終了 > ");
-		@SuppressWarnings("resource")
-		char ch = new Scanner(System.in).next().charAt(0);
+		char ch = Util.getChar("wsad:移動 b:戦う t:取る u:使う i:情報 q:終了 > ");
 		switch (ch) {
 			case 'w' -> moveUp();
 			case 's' -> moveDown();
@@ -121,9 +119,12 @@ public class Player {
 	
 	public Item selectItem() {
 		printItems();
-		System.out.print("選択>");
-		@SuppressWarnings("resource")
-		int index = new Scanner(System.in).nextInt();
+		int index = 0;
+		while (true) {
+			char ch = Util.getChar("選択>");
+			index = ch - '0';
+			if (index >= 1 && index <= items.size()) break;			
+		}
 		Item item = items.get(index - 1);
 		return item;
 	}

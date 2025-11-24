@@ -91,16 +91,15 @@ public class GameManager {
 	
 	public void battle(Player p) {
 		char ch = this.map[p.py][p.px];
-		if (ch == '.') return;
 		Monster m = null;
 		switch (ch) {
 		case 'g' -> m = new Goblin();
 		case 's' -> m = new Slime();
 		}
+		if (m == null) return;
+		System.out.println(m.name + "が現れた!");
 		while (m.hp > 0 && p.hp > 0) {
-			System.out.print("a:攻撃 e:逃げる > ");
-			@SuppressWarnings("resource")
-			char ch2 = new Scanner(System.in).next().charAt(0);
+			char ch2 = Util.getChar("a:攻撃 e:逃げる > ");
 			if (ch2 == 'a') {
 				attackAndReturn(p, m);
 			} else if (ch2 == 'e') {
