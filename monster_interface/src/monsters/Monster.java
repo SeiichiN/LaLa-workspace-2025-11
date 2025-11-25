@@ -1,6 +1,6 @@
 package monsters;
 
-public abstract class Monster {
+public abstract class Monster implements Runnable {
 	String name;
 	int hp = 100;
 	int mp = 50;

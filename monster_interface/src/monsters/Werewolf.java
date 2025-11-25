@@ -1,6 +1,6 @@
 package monsters;
 
-public class Werewolf extends Monster implements Runnable {
+public class Werewolf extends WalkingMonster {
 
 	public Werewolf(String name, Runnable runnable) {
 		super(name, runnable);

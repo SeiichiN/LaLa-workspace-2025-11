@@ -1,6 +1,6 @@
 package monsters;
 
-public class Goblin extends Monster implements Runnable {
+public class Goblin extends WalkingMonster {
 	
 	public Goblin(String name, Runnable runnable) {
 		super(name, runnable);

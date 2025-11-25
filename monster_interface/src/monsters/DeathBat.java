@@ -1,6 +1,6 @@
 package monsters;
 
-public class DeathBat extends Monster implements Runnable {
+public class DeathBat extends FlyingMonster {
 
 	public DeathBat(String name, Runnable runnable) {
 		super(name, runnable);
