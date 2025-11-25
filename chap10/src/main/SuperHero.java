@@ -3,6 +3,11 @@ package main;
 public class SuperHero extends Hero {
 	boolean flying;
 	
+	public SuperHero() {
+		super();
+		System.out.println("SuperHeroのコンストラクタが動作");
+	}
+	
 	@Override
 	public void attack(Matango m) {
 		super.attack(m);
