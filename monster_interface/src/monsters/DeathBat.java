@@ -2,8 +2,8 @@ package monsters;
 
 public class DeathBat extends FlyingMonster {
 
-	public DeathBat(String name, Runnable runnable) {
-		super(name, runnable);
+	public DeathBat(String name) {
+		super(name);
 	}
 
 	@Override

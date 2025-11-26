@@ -2,8 +2,8 @@ package monsters;
 
 public abstract class FlyingMonster extends Monster {
 
-	public FlyingMonster(String name, Runnable runnable) {
-		super(name, runnable);
+	public FlyingMonster(String name) {
+		super(name);
 	}
 	
 	@Override

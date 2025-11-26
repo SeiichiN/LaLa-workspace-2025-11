@@ -2,8 +2,8 @@ package monsters;
 
 public class Werewolf extends WalkingMonster {
 
-	public Werewolf(String name, Runnable runnable) {
-		super(name, runnable);
+	public Werewolf(String name) {
+		super(name);
 	}
 
 	@Override

@@ -2,8 +2,8 @@ package monsters;
 
 public class Goblin extends WalkingMonster {
 	
-	public Goblin(String name, Runnable runnable) {
-		super(name, runnable);
+	public Goblin(String name) {
+		super(name);
 	}
 
 	@Override

@@ -6,14 +6,18 @@ public abstract class Monster implements Runnable {
 	int mp = 50;
 	Runnable runnable;
 	
-	public Monster(String name, Runnable runnable) {
+	public Monster(String name) {
 		this.name = name;
-		this.runnable = runnable;
+		this.runnable = new NormalRun();
 	}
 	
 	public abstract void attack(Character c);
 	
 	public void run() {
 		runnable.run();
+	}
+	
+	public void setRunnable(Runnable runnable) {
+		this.runnable = runnable;
 	}
 }
