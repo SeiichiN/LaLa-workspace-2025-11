@@ -1,7 +1,7 @@
-package main;
+package main2;
 
-public class Magamo extends FlyingSwimmingBird {
-	
+public class Magamo extends Bird {
+
 	public Magamo() {
 		super("マガモ");
 	}
@@ -10,4 +10,5 @@ public class Magamo extends FlyingSwimmingBird {
 	public void say() {
 		System.out.println(this.name + "は、ガアガアと鳴く");
 	}
+
 }

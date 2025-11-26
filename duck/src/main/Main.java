@@ -3,19 +3,16 @@ package main;
 public class Main {
 
 	public static void main(String[] args) {
-		Magamo magamo = new Magamo("マガモ");
+		Magamo magamo = new Magamo();
 		magamo.say();
 		magamo.swim();
 		magamo.fly();
 		
-		magamo.setFlyBehavior(new JetFly());
-		magamo.fly();
+		Ahiru ahiru = new Ahiru();
+		ahiru.say();
+		ahiru.swim();
 		
-		Duck duck = new Duck("アヒル");
-		duck.say();
-		duck.swim();
-		
-		RabberDuck rduck = new RabberDuck("ラバーダック");
+		RabberDuck rduck = new RabberDuck();
 		rduck.say();
 		rduck.swim();
 	}

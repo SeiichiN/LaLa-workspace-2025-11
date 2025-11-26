@@ -1,23 +1,18 @@
 package main;
 
-public class RabberDuck extends Toy implements Swimming {
-	Swimming SwimBehabior;
-	Saying SayBehabior;
+public class RabberDuck extends Toy {
 
-	public RabberDuck(String name) {
-		super(name);
-		this.SwimBehabior = new ToySwim(this);
-		this.SayBehabior = new ToySay(this);
+	public RabberDuck() {
+		super("ラバーダック");
 	}
 
-	@Override
 	public void swim() {
-		this.SwimBehabior.swim();
+		System.out.println(this.name + "は、プカプカと浮かぶ。");
 		
 	}
 
 	public void say() {
-		this.SayBehabior.say();
+		System.out.println(this.name + "は、キュキュと鳴く");
 		
 	}
 
