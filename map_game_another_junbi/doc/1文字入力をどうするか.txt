@@ -31,12 +31,30 @@ while (true) {
 
 これだと、単に改行キーが入力されても対応できる。
 
+これをstaticメソッドにする。
+
+public class Util {
+  public static final Scanner SC = new java.util.Scanner(System.in);
+  
+  public static char getChar(String prompt) {
+    char ch = ' ';
+    while (true) {
+      System.out.print(prompt);
+      String text = SC.nextLine();
+      if (text.length() == 1) {
+        ch = text.charAt(0);
+        break;
+      }
+    }
+    return ch;
+  }
+}
+
+こうしておくと、Util.getChar(" > ") で呼び出せる。
 
 
 
 
 
 
-
-
-;; 修正時刻: Mon 2025/11/24 06:27:50
+;; 修正時刻: Fri 2025/11/28 06:43:23
