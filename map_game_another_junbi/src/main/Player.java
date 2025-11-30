@@ -13,7 +13,7 @@ public class Player {
 	public final int MAX_HP;
 	public int hp;
 	public final int HP_RECOVERY_PER_MOVE;
-	private GameManager gm;
+	private final GameManager gm;
 	private List<Item> items = new ArrayList<>();
 	
 	public Player(String name, GameManager gm) {

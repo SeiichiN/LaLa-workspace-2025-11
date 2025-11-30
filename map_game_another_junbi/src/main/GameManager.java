@@ -95,11 +95,7 @@ public class GameManager {
 	
 	public void battle(Player p) {
 		char ch = this.map[p.py][p.px];
-		Monster m = null;
-		switch (ch) {
-		case 'g' -> m = new Goblin();
-		case 's' -> m = new Slime();
-		}
+		Monster m = MonsterFactory.createMonster(ch);
 		if (m == null) return;
 		System.out.println(m.name + "が現れた!");
 		while (m.hp > 0 && p.hp > 0) {
