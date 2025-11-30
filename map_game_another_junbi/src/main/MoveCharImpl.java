@@ -4,6 +4,9 @@ import java.util.Random;
 
 public class MoveCharImpl implements MoveChar {
 	GameManager gm;
+	private int[][] dir = {{0, 0}, {-1, 0}, {1, 0}, {0, -1}, {0, 1}};
+	private Random rnd = new Random();	
+
 	
 	public MoveCharImpl(GameManager gm) {
 		this.gm = gm;
@@ -25,7 +28,7 @@ public class MoveCharImpl implements MoveChar {
 		}
 	}
 	
-
+	/*
 	private void moveCharacter(int y, int x) {
 		Random r = new Random();
 		int dy = r.nextInt(3) - 1;
@@ -39,49 +42,23 @@ public class MoveCharImpl implements MoveChar {
 		gm.map[ny][nx] = gm.map[y][x];
 		gm.map[y][x] = '.';
 	}
-
-    /*
+	*/
+    
 	private boolean isMovable(int y, int x) {
 		if (y < 0 || y >= gm.YSIZE || x < 0 || x >= gm.XSIZE) return false;
+		if (gm.map[y][x] != '.') return false;
 		return true;
 	}
 	
-	private boolean[] makeMovableCells(int y, int x) {
-		boolean[] cells = new boolean[5];
-		cells[0] = isMovable(y, x);
-		cells[1] = isMovable(y - 1, x);
-		cells[2] = isMovable(y + 1, x);
-		cells[3] = isMovable(y, x - 1);
-		cells[4] = isMovable(y, x + 1);
-		return cells;		
-	}
-	
-	private int[] getYX(int i) {
-		int[] ret = switch (i) {
-		case 0 -> new int[] {0, 0};
-		case 1 -> new int[] {-1, 0};
-		case 2 -> new int[] {1, 0};
-		case 3 -> new int[] {0, -1};
-		case 4 -> new int[] {0, 1};
-		default -> new int[] {0, 0};
-		};
-		return ret;
-	}
-	
-	private void moveChara(int y, int x) {
-		Random r = new Random();	
-		boolean[] cells = makeMovableCells(y, x);
-		int idx = r.nextInt(5);
-		while (!cells[idx]) {
-			idx = r.nextInt(5);
-		}
-		int [] yx = getYX(idx);
-		int newY = yx[0];
-		int newX = yx[1];
-		
-		if (gm.map[newY][newX] != '.') return;
-		gm.map[newY][newX] = gm.map[y][x];
+	private void moveCharacter(int y, int x) {
+		int nextY, nextX;
+		do {
+			int idx = rnd.nextInt(5);
+			nextY = y + dir[idx][0];
+			nextX = x + dir[idx][1];
+		} while (!isMovable(nextY, nextX));
+		gm.map[nextY][nextX] = gm.map[y][x];
 		gm.map[y][x] = '.';
 	}
-	*/
+	
 }
