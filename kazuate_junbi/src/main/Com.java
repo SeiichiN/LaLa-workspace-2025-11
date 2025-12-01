@@ -13,7 +13,7 @@ public class Com {
 	public void setTheNumber() {
 		this.number = new Random().nextInt(100);
 	}
-	public boolean quessTheNumber(int number) {
+	public boolean checkTheNumber(int number) {
 		if (number > this.number) {
 			System.out.println("もっと小さい");
 		} else if (number < this.number) {

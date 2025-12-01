@@ -11,12 +11,26 @@ public class User {
 		this.name = "ユーザー";
 	}
 	public void inputNumber() {
+		int number = 0;
 		while (true) {
 			System.out.println("1〜99の数字を入力してください");
-			int number = sc.nextInt();
-			if (com.quessTheNumber(number)) {
-				break;
-			}			
+			number = getSafeInt();
+			if (number >= 1 && number <= 99) {
+				if (com.checkTheNumber(number)) {
+					break;
+				}			
+			} else {
+				System.out.println("1〜99の数字を入力してください");
+			}
+		}
+	}
+	private int getSafeInt() {
+		if (sc.hasNextInt()) {
+			return sc.nextInt();
+		} else {
+			System.out.println("数字を入力してください");
+			sc.nextInt();
+			return getSafeInt();
 		}
 	}
 }

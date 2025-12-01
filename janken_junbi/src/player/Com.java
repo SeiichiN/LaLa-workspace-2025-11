@@ -4,12 +4,13 @@ import java.util.Random;
 
 public class Com extends Player{
 	public Com() {
-		super.name = "コム";
+		super("コム");
 	}
 
 	@Override
 	public void selectHand() {
-		super.hand = new Random().nextInt(3);
+		int hand = new Random().nextInt(3);
+		setHand(hand);
 	}
 
 }
