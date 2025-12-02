@@ -1,5 +1,6 @@
 package main;
 
+import player.Com;
 import player.User;
 
 public class Main {
@@ -8,6 +9,13 @@ public class Main {
 		User user = new User();
 		user.selectHand();
 		user.printHand();
+		
+		Com com = new Com();
+		com.selectHand();
+		com.printHand();
+		
+		GameManager gm = new GameManager();
+		gm.judge(user, com);
 	}
 
 }
