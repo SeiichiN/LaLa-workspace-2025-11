@@ -28,12 +28,11 @@ public class GameManager {
 	public void setPosition(char c) {
 		int y, x;
 		do {
-			y = new java.util.Random().nextInt(5);
-			x = new java.util.Random().nextInt(5);
+			y = new java.util.Random().nextInt(this.YSIZE);
+			x = new java.util.Random().nextInt(this.XSIZE);
 		} while(map[y][x] != '.');
 		map[y][x] = c;		
 	}
-	
 
 	
 	public void printMap(Player p) {
