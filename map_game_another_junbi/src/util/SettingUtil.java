@@ -11,7 +11,7 @@ public class SettingUtil {
 
 	public void execute() {
 		printProperties();
-		char ch = Util.getChar("変更しますか? (y/n) > ");
+		char ch = InputUtil.getChar("変更しますか? (y/n) > ");
 		if (ch == 'y') {
 			saveProperties();
 		}
@@ -24,17 +24,16 @@ public class SettingUtil {
 		System.out.println("3. ゴブリンの数:" + rs.NUM_GOBLIN);
 		System.out.println("4. スライムの数:" + rs.NUM_SLIME);
 		System.out.println("5. ポーションの数:" + rs.NUM_POTION);
-		System.out.println("6. プレイヤーに名前:" + rs.NAME);
+		System.out.println("6. プレイヤーの名前:" + rs.NAME);
 	}
 	
 	public void saveProperties() {
-		String ysize = "" + Util.getChar("マップの行数 > ");
-		String xsize = "" + Util.getChar("マップの列数 > ");
-		String goblin = "" + Util.getChar("コゴブリンの数 > ");
-		String slime = "" + Util.getChar("スライムの数 > ");
-		String potion = "" + Util.getChar("ポーションの数 > ");
-		System.out.print("プレイヤーに名前 > ");
-		String name = new java.util.Scanner(System.in).nextLine();
+		String ysize = "" + InputUtil.getNumStr("マップの行数 > ");
+		String xsize = "" + InputUtil.getNumStr("マップの列数 > ");
+		String goblin = "" + InputUtil.getNumStr("コゴブリンの数 > ");
+		String slime = "" + InputUtil.getNumStr("スライムの数 > ");
+		String potion = "" + InputUtil.getChar("ポーションの数 > ");
+		String name = InputUtil.getStr("プレイヤーの名前 > ");
 
 		Properties prop = new Properties();
 		prop.setProperty("ysize", ysize);
@@ -45,7 +44,7 @@ public class SettingUtil {
 		prop.setProperty("name", name);
 		
 		try (Writer writer = new OutputStreamWriter(
-				new FileOutputStream("player.properties"), StandardCharsets.UTF_8)) {
+				new FileOutputStream("player.properties"), "UTF-8")) {
 			prop.store(writer, "Player Settings");
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import util.Util;
+import util.InputUtil;
+import util.Utility;
 
 public class Player {
 	public String name = "プレイヤー";
@@ -32,7 +33,7 @@ public class Player {
 	}
 	
 	public void command() {
-		char ch = Util.getChar("wsad:移動 b:戦う t:取る u:使う i:情報 q:終了 > ");
+		char ch = InputUtil.getChar("wsad:移動 b:戦う t:取る u:使う i:情報 q:終了 > ");
 		switch (ch) {
 			case 'w' -> moveUp();
 			case 's' -> moveDown();
@@ -82,7 +83,7 @@ public class Player {
 	public void attack(Monster m) {
 		if (this.hp <= 0) return;
 		System.out.println("\n" + name + "は" + m.name + "を攻撃した!");
-		int damage = new Random().nextInt(30);
+		int damage = Utility.RND.nextInt(30);
 		m.hp -= damage;
 		System.out.println(m.name + "は" + damage + "のダメージを受けた!");
 	}
@@ -126,7 +127,7 @@ public class Player {
 		printItems();
 		int index = 0;
 		while (true) {
-			char ch = Util.getChar("選択>");
+			char ch = InputUtil.getChar("選択>");
 			index = ch - '0';
 			if (index >= 1 && index <= items.size()) break;			
 		}

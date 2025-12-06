@@ -1,10 +1,8 @@
 package main;
 
-import java.util.Random;
-import java.util.Scanner;
-
 import util.SettingUtil;
-import util.Util;
+import util.Utility;
+import util.InputUtil;
 
 public class GameManager {
 	public final int YSIZE;
@@ -15,7 +13,7 @@ public class GameManager {
 	public MoveChar moveChar;
 	public boolean isEnd = false;
 	
-	public GameManager(int ysize, int xsize) {
+	public GameManager(int ysize, int xsize, MoveChar moveChar) {
 		this.YSIZE = ysize;
 		this.XSIZE = xsize;
 		this.map = new char[YSIZE][XSIZE];
@@ -23,8 +21,12 @@ public class GameManager {
 		this.moveChar = new MoveCharImpl(this);
 	}
 	
-	public GameManager() {
-		this(5, 5);
+	public GameManager(int ysize, int xsize) {
+		this.YSIZE = ysize;
+		this.XSIZE = xsize;
+		this.map = new char[YSIZE][XSIZE];
+		initMap();
+		this.moveChar = new MoveCharImpl(this);
 	}
 	
 	public void initMap() {
@@ -40,11 +42,10 @@ public class GameManager {
 	}
 
 	private void setPosition(char ch) {
-		Random r = new Random();
 		int y, x;
 		do {
-			y = r.nextInt(YSIZE);
-			x = r.nextInt(XSIZE);
+			y = Utility.RND.nextInt(YSIZE);
+			x = Utility.RND.nextInt(XSIZE);
 		} while(map[y][x] != '.');
 		map[y][x] = ch;
 	}
@@ -99,7 +100,7 @@ public class GameManager {
 		if (m == null) return;
 		System.out.println(m.name + "が現れた!");
 		while (m.hp > 0 && p.hp > 0) {
-			char ch2 = Util.getChar("a:攻撃 e:逃げる > ");
+			char ch2 = InputUtil.getChar("a:攻撃 e:逃げる > ");
 			if (ch2 == 'a') {
 				attackAndReturn(p, m);
 			} else if (ch2 == 'e') {
@@ -127,7 +128,7 @@ public class GameManager {
 				======================
 				""";
 		System.out.println(msg);
-		char ch = Util.getChar("設定を確認しますか? (y/n) > ");
+		char ch = InputUtil.getChar("設定を確認しますか? (y/n) > ");
 		if (ch == 'y') {
 			SettingUtil settingUtil = new SettingUtil();
 			settingUtil.execute();
